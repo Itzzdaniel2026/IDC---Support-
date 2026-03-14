@@ -61,7 +61,7 @@ button:hover{
 
 <input type="text" id="name" placeholder="Your Name" required>
 
-<input type="email" id="email" placeholder="Your Email" required>
+<input type="text" id="userid" placeholder="Your Discord ID (e.g. 1166814431826162896)" required>
 
 <input type="text" id="subject" placeholder="Subject" required>
 
@@ -74,14 +74,14 @@ button:hover{
 
 <script>
 
-const webhookURL = "https://discord.com/api/webhooks/1482337314670903416/07P0kN8t1TFwTDUCrOsZyj0LCYUevSPZF4YKIhbyYzdtYQJou4JKDQAjDi0AmN0_wGFW";
+const webhookURL = "YOUR_WEBHOOK_URL_HERE";
 
 document.getElementById("supportForm").addEventListener("submit", function(e){
 
 e.preventDefault();
 
 const name = document.getElementById("name").value;
-const email = document.getElementById("email").value;
+const userid = document.getElementById("userid").value;
 const subject = document.getElementById("subject").value;
 const message = document.getElementById("message").value;
 
@@ -96,8 +96,8 @@ const data = {
                 inline: true
             },
             {
-                name: "ID",
-                value: ID (e.g 1166814431826162896),
+                name: "User ID",
+                value: userid,
                 inline: true
             },
             {
@@ -109,7 +109,7 @@ const data = {
                 value: message
             }
         ],
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
     }]
 };
 
