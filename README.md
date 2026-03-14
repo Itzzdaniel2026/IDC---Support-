@@ -61,7 +61,7 @@ button:hover{
 
 <input type="text" id="name" placeholder="Your Name" required>
 
-<input type="text" id="userid" placeholder="Your Discord ID (e.g. 1166814431826162896)" required>
+<input type="text" id="id" placeholder="Your Discord ID" required>
 
 <input type="text" id="subject" placeholder="Subject" required>
 
@@ -74,14 +74,14 @@ button:hover{
 
 <script>
 
-const webhookURL = "YOUR_WEBHOOK_URL_HERE";
+const webhookURL = "PASTE_NEW_WEBHOOK_HERE";
 
 document.getElementById("supportForm").addEventListener("submit", function(e){
 
 e.preventDefault();
 
 const name = document.getElementById("name").value;
-const userid = document.getElementById("userid").value;
+const id = document.getElementById("id").value;
 const subject = document.getElementById("subject").value;
 const message = document.getElementById("message").value;
 
@@ -96,8 +96,8 @@ const data = {
                 inline: true
             },
             {
-                name: "User ID",
-                value: userid,
+                name: "ID",
+                value: id,
                 inline: true
             },
             {
@@ -120,13 +120,17 @@ fetch(webhookURL, {
     },
     body: JSON.stringify(data)
 })
-.then(response => {
-    alert("Support request sent!");
-    document.getElementById("supportForm").reset();
+.then(res => {
+    if(res.ok){
+        alert("Support request sent!");
+        document.getElementById("supportForm").reset();
+    } else {
+        alert("Webhook failed. Check console.");
+    }
 })
-.catch(error => {
-    alert("Error sending request.");
-    console.error(error);
+.catch(err => {
+    console.error(err);
+    alert("Error sending ticket.");
 });
 
 });
